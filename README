@@ -1,0 +1,29 @@
+R6RS-cdb
+
+This library provides procedures to cdb database reading for R6RS.
+
+
+Install:
+
+How to install is different depending on Scheme language processor.
+See document of language processors.
+
+
+Procedures:
+
+(open-input-cdb filename)
+
+Opens a cdb database in input-mode.
+On success, it returns the cdb object.
+
+(dbm-get cdb key)
+
+Get a value associated with key.
+If no value exists for key, #f is returned.
+Key and returned value is bytevector.
+
+
+License:
+
+R6RS-cdb is BSD style license.
+See also COPYING.
