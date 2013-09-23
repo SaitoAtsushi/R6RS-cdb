@@ -16,7 +16,7 @@ Procedures:
 Opens a cdb database in input-mode.
 On success, it returns the cdb object.
 
-(dbm-get cdb key)
+(cdb-get cdb key)
 
 Get a value associated with key.
 If no value exists for key, #f is returned.
