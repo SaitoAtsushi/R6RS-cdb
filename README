@@ -22,6 +22,11 @@ Get a value associated with key.
 If no value exists for key, #f is returned.
 Key and returned value is bytevector.
 
+(close-input-cdb cdb)
+
+Closes a database.
+Once the database is closed, any operation to access the database content raises an error.
+
 
 License:
 

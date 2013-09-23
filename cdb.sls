@@ -1,6 +1,6 @@
 
 (library (cdb)
-  (export open-input-cdb cdb-get)
+  (export open-input-cdb cdb-get close-input-cdb)
   (import (rnrs))
 
   (define (bytevector-u8-fold kons knil e)
@@ -30,6 +30,10 @@
     (let ((port
            (open-file-input-port filename input-file-option input-file-mode)))
       (make-input-cdb port (get-bytevector-n port 2048))))
+
+  (define (close-input-cdb cdb)
+    (let ((port (input-cdb-port cdb)))
+      (close-port port)))
 
   (define (lookup-main-table table hash-value)
     (let ((pos (* 2 (mod hash-value 256))))

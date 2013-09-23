@@ -19,4 +19,5 @@
    (if (eqv? (cdb-get cdb (string->utf8 "non-exist")) #f) 'OK 'NG))
   (newline)
 
+  (close-input-cdb cdb)
   )
