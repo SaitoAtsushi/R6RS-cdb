@@ -58,20 +58,21 @@
         (lambda(p e)
           (if (zero? e)
               #f
-              (let loop ((i (mod (bitwise-arithmetic-shift-right h 8) e)))
-                (let ((h1 (get-u32/position port (+ (* (mod i e) 8) p))))
-                  (if (zero? h1)
-                      #f
-                      (if (= h1 h)
-                          (let* ((r (get-u32 port))
-                                 (kl (get-u32/position port r))
-                                 (dl (get-u32 port)))
-                            (if (and (= kl keylen)
-                                     (bytevector=?
-                                      (get-bytevector-n port kl)
-                                      key))
-                                (get-bytevector-n port dl)
-                                (loop (mod (+ i 1) e))))
-                          (loop (mod (+ i 1) e)))))))))))
+              (let ((start (bitwise-arithmetic-shift-right h 8)))
+                (let loop ((i 0))
+                  (if (= i e) #f
+                      (let ((h1 (get-u32/position port (+ (* (mod (+ start i) e) 8) p))))
+                        (cond ((zero? h1) #f)
+                              ((= h1 h)
+                               (let* ((r (get-u32 port))
+                                      (kl (get-u32/position port r))
+                                      (dl (get-u32 port)))
+                                 (if (and (= kl keylen)
+                                          (bytevector=?
+                                           (get-bytevector-n port kl)
+                                           key))
+                                     (get-bytevector-n port dl)
+                                     (loop (+ i 1)))))
+                              (else (loop (+ i 1)))))))))))))
 
   )
