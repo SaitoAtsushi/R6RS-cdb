@@ -13,18 +13,38 @@ Procedures:
 
 (open-input-cdb filename)
 
-Opens a cdb database in input-mode.
+Opens a cdb database with input-mode.
 On success, it returns the cdb object.
+filename is string.
+
+(open-output-cdb filename)
+
+Opens a cdb database with output-mode.
+On success, it returns the cdb object.
+Filename is string.
 
 (cdb-get cdb key)
 
 Get a value associated with key.
 If no value exists for key, #f is returned.
+Cdb is cdb object that be opened as input-mode.
 Key and returned value is bytevector.
+
+(cdb-set cdb key value)
+
+Set a value associated with key.
+Return value was not specified.
+Cdb is cdb object that be opened as output-mode.
+Key and value is bytevector.
 
 (close-input-cdb cdb)
 
-Closes a database.
+Closes a input-mode cdb object.
+Once the database is closed, any operation to access the database content raises an error.
+
+(close-output-cdb cdb)
+
+Closes a output-mode cdb object.
 Once the database is closed, any operation to access the database content raises an error.
 
 
